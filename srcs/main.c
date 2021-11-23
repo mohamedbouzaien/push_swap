@@ -17,9 +17,9 @@ int     find(int *tab, int  val, int n)
 	int i;
 
 	i = 0;
-	while (tab[i] != val && i < n)
+	while (tab[i] != val && i < n - 1)
 		i++;
-	return (tab[i] == n);
+	return (tab[i] == val && i < (n - 1));
 }
 
 int		is_sorted(int *stack, int n)
@@ -45,6 +45,7 @@ int     main(int ac, char **av)
 	int		*stack_b;
 
 	i = 1;
+	size_b = -1;
 	if (ac > 2)
 	{
 		stack_a = (int *)malloc(ac * sizeof(int));

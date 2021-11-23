@@ -22,6 +22,8 @@ void	push(int *stack, int *size, int to_add)
 		stack[i + 1] = stack[i];
 		i--;
 	}
+	if (i == -1)
+		i = 0;
 	stack[i] = to_add;
 	(*size)++;
 }
@@ -31,7 +33,7 @@ void	pop(int *stack, int *size)
 	int	i;
 
 	i = 1;
-	while (i < *size)
+	while (i <= *size)
 	{
 		stack[i - 1] = stack[i];
 		i++;
@@ -41,7 +43,7 @@ void	pop(int *stack, int *size)
 
 void	do_pa(int *stack_a, int *stack_b, int *size_a, int *size_b)
 {
-	if (*size_b > 0)
+	if (*size_b > -1)
 	{
 		push(stack_a, size_a, stack_b[0]);
 		pop(stack_b, size_b);
@@ -51,7 +53,7 @@ void	do_pa(int *stack_a, int *stack_b, int *size_a, int *size_b)
 
 void	do_pb(int *stack_a, int *stack_b, int *size_a, int *size_b)
 {
-	if (*size_a > 0)
+	if (*size_a > -1)
 	{
 		push(stack_b, size_b, stack_a[0]);
 		pop(stack_a, size_a);

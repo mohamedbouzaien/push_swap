@@ -14,7 +14,7 @@
 
 # define PUSH_SWAP_H_
 # include "libft.h"
-
+# include <stdio.h>
 void	do_sa(int *stack_a, int size);
 void	do_sb(int *stack_b, int size);
 void	do_ss(int *stack_a, int *stack_b, int size_a, int size_b);
@@ -28,4 +28,6 @@ void	do_rrb(int *stack_b, int size);
 void	do_rrr(int *stack_a, int *stack_b, int size_a, int size_b);
 void	small_size_sort(int *stack_a, int *stack_b, int *size_a, int *size_b);
 
+//To delete
+void	show_stack(int *stack, int size);
 #endif
