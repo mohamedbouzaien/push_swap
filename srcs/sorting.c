@@ -290,7 +290,7 @@ void	sort_chunk(int *stack_a, int *stack_b, int *size_a, int *size_b, int max, i
 		chunk_size--;
 	}
 	max = find_max(stack_b, *size_b);
-	smart_rotate_a(stack_a, *size_a, find_closest(stack_a, *size_a, max));
+	smart_rotate_a(stack_a, *size_a, find_closest(stack_a, *size_a, stack_b[max]));
 	// show_stack(stack_b, *size_b);
 	while (*size_b > -1)
 	{
@@ -337,7 +337,7 @@ void	big_size_sort(int *stack_a, int *stack_b, int *size_a, int *size_b)
 	int		max;
 	int 	chunks;
 
-	chunks = *size_a / 10 + 1;
+	chunks = *size_a / 50;
 	max =  find_max(stack_a, *size_a);
 	while (chunks > 0)
 	{
