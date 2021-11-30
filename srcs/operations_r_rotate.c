@@ -6,7 +6,7 @@
 /*   By: mbouzaie <mbouzaie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/22 00:14:52 by mbouzaie          #+#    #+#             */
-/*   Updated: 2021/11/22 11:35:24 by mbouzaie         ###   ########.fr       */
+/*   Updated: 2021/11/25 22:01:22 by mbouzaie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,16 @@ void	reverse_rotate(int *stack, int size)
 	int		i;
 	int     tmp;
 
-	if (size > 1)
+	if (size >= 1)
 	{
-		tmp = stack[0];
-		i = 0;
-		while (i < size)
+		tmp = stack[size];
+		i = size;
+		while (i > 0)
 		{
-			stack[i] = stack[i + 1];
-			i++;
+			stack[i] = stack[i - 1];
+			i--;
 		}
-		stack[size] = tmp;
+		stack[0] = tmp;
 	}
 }
 

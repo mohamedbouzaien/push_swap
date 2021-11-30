@@ -6,7 +6,7 @@
 /*   By: mbouzaie <mbouzaie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/21 17:52:44 by mbouzaie          #+#    #+#             */
-/*   Updated: 2021/11/22 12:43:15 by mbouzaie         ###   ########.fr       */
+/*   Updated: 2021/11/30 16:54:42 by mbouzaie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int		is_sorted(int *stack, int n)
 	int		i;
 
 	i = 0;
-	while (i < (n - 1))
+	while (i < n)
 	{
 		if (stack[i] > stack[i + 1])
 			return (0);
@@ -65,7 +65,14 @@ int     main(int ac, char **av)
 			i++;
 		}
 		i = i - 2;
-		small_size_sort(stack_a, stack_b, &i, &size_b);
+		if (!is_sorted(stack_a, i))
+		{
+			if (i < 5)
+				small_size_sort(stack_a, stack_b, &i, &size_b);
+			else
+				big_size_sort(stack_a, stack_b, &i, &size_b);
+		}
+		// show_stack(stack_a, i);
 	}
 	else
 		ft_putchar_fd('\n', 1);

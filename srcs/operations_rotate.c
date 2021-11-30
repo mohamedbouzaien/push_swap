@@ -6,7 +6,7 @@
 /*   By: mbouzaie <mbouzaie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/21 23:32:12 by mbouzaie          #+#    #+#             */
-/*   Updated: 2021/11/22 00:09:06 by mbouzaie         ###   ########.fr       */
+/*   Updated: 2021/11/26 10:55:13 by mbouzaie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,16 @@ void	rotate(int *stack, int size)
 	int		i;
 	int     tmp;
 
-	if (size > 1)
+	if (size >= 1)
 	{
-		tmp = stack[size];
-		i = size;
-		while (i > 0)
+		tmp = stack[0];
+		i = 0;
+		while (i < size)
 		{
-			stack[i] = stack[i - 1];
-			i--;
+			stack[i] = stack[i + 1];
+			i++;
 		}
-		stack[0] = tmp;
+		stack[size] = tmp;
 	}
 }
 

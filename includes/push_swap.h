@@ -6,7 +6,7 @@
 /*   By: mbouzaie <mbouzaie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/21 23:12:54 by mbouzaie          #+#    #+#             */
-/*   Updated: 2021/11/22 12:38:20 by mbouzaie         ###   ########.fr       */
+/*   Updated: 2021/11/25 10:08:42 by mbouzaie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ void	do_rra(int *stack_a, int size);
 void	do_rrb(int *stack_b, int size);
 void	do_rrr(int *stack_a, int *stack_b, int size_a, int size_b);
 void	small_size_sort(int *stack_a, int *stack_b, int *size_a, int *size_b);
-
+void	big_size_sort(int *stack_a, int *stack_b, int *size_a, int *size_b);
+int		is_sorted(int *stack, int n);
 //To delete
 void	show_stack(int *stack, int size);
 #endif
