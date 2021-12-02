@@ -6,7 +6,7 @@
 /*   By: mbouzaie <mbouzaie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/21 23:12:54 by mbouzaie          #+#    #+#             */
-/*   Updated: 2021/11/25 10:08:42 by mbouzaie         ###   ########.fr       */
+/*   Updated: 2021/12/01 23:57:10 by mbouzaie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,15 @@
 
 # define PUSH_SWAP_H_
 # include "libft.h"
+#include <limits.h>
 # include <stdio.h>
+
+typedef struct  s_stack
+{
+    int     *cntr;
+    int     size;
+}               t_stack;
+
 void	do_sa(int *stack_a, int size);
 void	do_sb(int *stack_b, int size);
 void	do_ss(int *stack_a, int *stack_b, int size_a, int size_b);

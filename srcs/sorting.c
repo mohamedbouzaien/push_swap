@@ -6,7 +6,7 @@
 /*   By: mbouzaie <mbouzaie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/22 11:41:03 by mbouzaie          #+#    #+#             */
-/*   Updated: 2021/11/30 16:53:39 by mbouzaie         ###   ########.fr       */
+/*   Updated: 2021/12/01 17:09:28 by mbouzaie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -263,43 +263,65 @@ int		index_of(int *stack, int size, int n)
 	return (-1);
 }
 
+int		find_next_in_range(int *stack, int size, int max, int min)
+{
+	int	i;
+	int	distance;
+	int	closest;
+
+	i = 0;
+	distance = 2147483647;
+	closest = -1;
+	while (i <= size)
+	{
+		if ((abs(stack[i] - min) <= distance || abs(stack[i] - max) <= distance) && (stack[i] >= min && stack[i] <= max))
+		{
+			if (abs(stack[i] - min) <= distance)
+				distance = abs(stack[i] - min);
+			else
+				distance = abs(stack[i] - min);
+			closest = i;
+		}
+		i++;
+	}
+	return (closest);
+}
+
 void	sort_chunk(int *stack_a, int *stack_b, int *size_a, int *size_b, int max, int min)
 {
+	int		i;
 	int		tmp;
 	int		chunk_size;
 
 	chunk_size = get_range(stack_a, *size_a, stack_a[max], stack_a[min]);
+	max = stack_a[max];
+	min = stack_a[min];
 	while (chunk_size > 0)
 	{
-		if ((min < max && min < *size_a / 2) || (min > max && min >= *size_a))
-		{
-			tmp = stack_a[max];
-			smart_rotate_a(stack_a, *size_a, min);
-			do_pb(stack_a, stack_b, size_a, size_b);
-			max = index_of(stack_a, *size_a, tmp);
-			min = get_successor(stack_a, *size_a,  stack_b[0]);
-		}
-		else
-		{
-			tmp = stack_a[min];
-			smart_rotate_a(stack_a, *size_a, max);
-			do_pb(stack_a, stack_b, size_a, size_b);
-			min = index_of(stack_a, *size_a, tmp);
-			max = get_predecessor(stack_a, *size_a,  stack_b[0]);
-		}
+		while (stack_a[0] < min || stack_a[0] > max)
+			do_rra(stack_a, *size_a);
+		do_pb(stack_a, stack_b, size_a, size_b);
 		chunk_size--;
 	}
 	max = find_max(stack_b, *size_b);
 	smart_rotate_a(stack_a, *size_a, find_closest(stack_a, *size_a, stack_b[max]));
-	// show_stack(stack_b, *size_b);
 	while (*size_b > -1)
 	{
 		max = find_max(stack_b, *size_b);
-		smart_rotate_b(stack_b, *size_b, max);
-		do_pa(stack_a, stack_b, size_a, size_b);
+		min = find_min(stack_b, *size_b);
+		if ((min < max && min < *size_b / 4) || (min > max && min >= *size_b / 4))
+		{
+			smart_rotate_b(stack_b, *size_b, min);
+			do_pa(stack_a, stack_b, size_a, size_b);
+			do_ra(stack_a, *size_a);
+		}
+		else
+		{
+			smart_rotate_b(stack_b, *size_b, max);
+			do_pa(stack_a, stack_b, size_a, size_b);
+		}
+		chunk_size--;
 	}
-	// show_stack(stack_a, *size_a);
-	
 }
 
 int		get_limit(int *stack, int size, int max, int range)
@@ -335,9 +357,14 @@ void	big_size_sort(int *stack_a, int *stack_b, int *size_a, int *size_b)
 	int		min;
 	int		tmp;
 	int		max;
+	int		coef;
 	int 	chunks;
 
-	chunks = *size_a / 50;
+	if (*size_a > 200)
+		coef = 50;
+	else
+		coef = 20;
+	chunks = *size_a / coef + 1;
 	max =  find_max(stack_a, *size_a);
 	while (chunks > 0)
 	{
@@ -350,4 +377,6 @@ void	big_size_sort(int *stack_a, int *stack_b, int *size_a, int *size_b)
 		max = get_predecessor(stack_a, *size_a, tmp);
 		chunks--;
 	}
+	min = find_min(stack_a, *size_a);
+	smart_rotate_a(stack_a, *size_a, min);
 }

@@ -6,7 +6,7 @@
 /*   By: mbouzaie <mbouzaie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/03 14:55:29 by mbouzaie          #+#    #+#             */
-/*   Updated: 2021/11/21 18:19:22 by mbouzaie         ###   ########.fr       */
+/*   Updated: 2021/12/01 23:33:01 by mbouzaie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,4 +85,5 @@ t_list				*ft_lstlast(t_list *lst);
 char				*ft_strnjoin(const char *s1, const char *s2, size_t len);
 int					ft_chrloc(char *str, int ch);
 char				*ft_uitoa(uintmax_t n, unsigned int base);
+long	int			ft_atol(const char *str);
 #endif

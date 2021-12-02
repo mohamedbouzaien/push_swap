@@ -6,7 +6,7 @@
 #    By: mbouzaie <mbouzaie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/03 15:10:22 by mbouzaie          #+#    #+#              #
-#    Updated: 2020/06/07 19:36:06 by mbouzaie         ###   ########.fr        #
+#    Updated: 2021/12/01 23:36:07 by mbouzaie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -70,6 +70,7 @@ SRC = 	ft_memset.c \
 		ft_chrloc.c  \
 		ft_memdel.c \
 		ft_uitoa.c \
+		ft_atol.c \
 
 SRC_B =	ft_lstnew.c \
 		ft_lstadd_front.c \

@@ -6,7 +6,7 @@
 /*   By: mbouzaie <mbouzaie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/21 17:52:44 by mbouzaie          #+#    #+#             */
-/*   Updated: 2021/11/30 16:54:42 by mbouzaie         ###   ########.fr       */
+/*   Updated: 2021/12/02 01:20:30 by mbouzaie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,43 +36,81 @@ int		is_sorted(int *stack, int n)
 	return (1);
 }
 
+t_stack	*create_stack(char **str, int begin, int size)
+{
+	int				i;
+	t_stack			*stack;
+	long int		val;
+
+	stack = (t_stack *)malloc(sizeof(t_stack) + 1);
+	stack->cntr = (int *)malloc(size * sizeof(int) * 2);
+	i = begin;
+	while (i < size)
+	{
+		val= ft_atol(str[i]);
+		if ((str[i][0] != '0' && val == 0) || val > INT_MAX || val < INT_MIN \
+			|| find(stack->cntr, (int)val, i))
+		{
+			ft_putstr_fd("Error\n", 2);
+			free(stack->cntr);
+			free(stack);
+			exit(0);
+		}
+		else
+		{
+			if (begin == 1)
+				stack->cntr[i - 1] = (int)val;
+			else
+				stack->cntr[i] = (int)val;
+		}
+		i++;
+	}
+	stack->size = i - begin - 1;
+	return (stack);
+}
+
 int     main(int ac, char **av)
 {
-	int     i;
-	int     val;
-	int		size_b;
-	int     *stack_a;
-	int		*stack_b;
+	int				i;
+	t_stack			*a;
+	t_stack			b;
+	char			**str;
+	int				*stack_b;
 
-	i = 1;
-	size_b = -1;
-	if (ac > 2)
+	i = 0;
+	b.size = -1;
+	if (ac >= 2)
 	{
-		stack_a = (int *)malloc(ac * sizeof(int));
-		stack_b = (int *)malloc(ac * sizeof(int));
-		while (i < ac)
+		if (ac == 2)
 		{
-			val= ft_atoi(av[i]);
-			if ((av[i][0] != '0' && val == 0) || find(stack_a, val, i))
+			str = ft_split(av[1], ' ');
+			while (str[i] != NULL)
+				i++;
+			a = create_stack(str, 0, i);
+			i = 0;
+			while (str[i])
 			{
-				ft_putstr_fd("Error\n", 2);
-				free(stack_a);
-				free(stack_b);
-				exit(0);
+				free(str[i]);
+				i++;
 			}
-			else
-				stack_a[i - 1] = val;
-			i++;
+			free(str);	
+			stack_b = (int *)malloc(i * sizeof(int) * 2);
 		}
-		i = i - 2;
-		if (!is_sorted(stack_a, i))
+		else
+		{
+			a = create_stack(av, 1, ac);
+			stack_b = (int *)malloc(ac * sizeof(int) * 2);
+		}
+		if (!is_sorted(a->cntr, a->size))
 		{
 			if (i < 5)
-				small_size_sort(stack_a, stack_b, &i, &size_b);
+				small_size_sort(a->cntr, stack_b, &(a->size), &(b.size));
 			else
-				big_size_sort(stack_a, stack_b, &i, &size_b);
+				big_size_sort(a->cntr,stack_b, &(a->size), &(b.size));
 		}
-		// show_stack(stack_a, i);
+		free(stack_b);
+		free(a->cntr);
+		free(a);
 	}
 	else
 		ft_putchar_fd('\n', 1);

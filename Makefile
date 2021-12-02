@@ -6,7 +6,7 @@
 #    By: mbouzaie <mbouzaie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/09/12 23:24:12 by mbouzaie          #+#    #+#              #
-#    Updated: 2021/11/22 12:37:43 by mbouzaie         ###   ########.fr        #
+#    Updated: 2021/12/02 00:55:39 by mbouzaie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,7 @@ OBJS			= $(addprefix $(OBJ_DIR), $(OFILE))
 
 CC				= gcc
 RM				= rm -f
-CFLAGS			= -g -o #-fsanitize=address -O3 -Wall -Wextra -Werror#
+CFLAGS			= -fsanitize=address -g -o # -O3 -Wall -Wextra -Werror#
 				 
 LIBS			= $(CUB3D_H) $(LIBFT_H)
 
