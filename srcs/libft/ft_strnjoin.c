@@ -12,12 +12,13 @@
 
 #include "includes/libft.h"
 
-char			*ft_strnjoin(const char *s1, const char *s2, size_t len)
+char	*ft_strnjoin(const char *s1, const char *s2, size_t len)
 {
 	char	*s;
 	char	*ret;
 
-	if (!(s = ft_strnew(ft_strlen(s1) + len)))
+	s = ft_strnew(ft_strlen(s1) + len);
+	if (!s)
 		return (NULL);
 	ret = s;
 	while (s1 && *s1)

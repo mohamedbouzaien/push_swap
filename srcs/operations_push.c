@@ -6,58 +6,57 @@
 /*   By: mbouzaie <mbouzaie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/21 22:51:52 by mbouzaie          #+#    #+#             */
-/*   Updated: 2021/11/22 00:25:24 by mbouzaie         ###   ########.fr       */
+/*   Updated: 2021/12/02 17:18:18 by mbouzaie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-void	push(int *stack, int *size, int to_add)
+static void	push(t_stack *stack, int to_add)
 {
 	int	i;
 
-	i = *size;
+	i = stack->size;
 	while (i >= 0)
 	{
-		stack[i + 1] = stack[i];
+		stack->cntr[i + 1] = stack->cntr[i];
 		i--;
 	}
 	if (i == -1)
 		i = 0;
-	stack[i] = to_add;
-	(*size)++;
+	stack->cntr[i] = to_add;
+	stack->size++;
 }
 
-void	pop(int *stack, int *size)
+static void	pop(t_stack *stack)
 {
 	int	i;
 
 	i = 1;
-	while (i <= *size)
+	while (i <= stack->size)
 	{
-		stack[i - 1] = stack[i];
+		stack->cntr[i - 1] = stack->cntr[i];
 		i++;
 	}
-	(*size)--;
+	stack->size--;
 }
 
-void	do_pa(int *stack_a, int *stack_b, int *size_a, int *size_b)
+void	do_pa(t_stack *a, t_stack *b)
 {
-	if (*size_b > -1)
+	if (b->size > -1)
 	{
-		push(stack_a, size_a, stack_b[0]);
-		pop(stack_b, size_b);
+		push(a, b->cntr[0]);
+		pop(b);
 		ft_putendl_fd("pa", 1);
 	}
 }
 
-void	do_pb(int *stack_a, int *stack_b, int *size_a, int *size_b)
+void	do_pb(t_stack *a, t_stack *b)
 {
-	if (*size_a > -1)
+	if (a->size > -1)
 	{
-		push(stack_b, size_b, stack_a[0]);
-		pop(stack_a, size_a);
+		push(b, a->cntr[0]);
+		pop(a);
 		ft_putendl_fd("pb", 1);
 	}
 }
-

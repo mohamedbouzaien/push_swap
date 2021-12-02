@@ -6,45 +6,45 @@
 /*   By: mbouzaie <mbouzaie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/22 00:14:52 by mbouzaie          #+#    #+#             */
-/*   Updated: 2021/11/25 22:01:22 by mbouzaie         ###   ########.fr       */
+/*   Updated: 2021/12/02 17:14:08 by mbouzaie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../includes/push_swap.h"
+#include "../includes/push_swap.h"
 
-void	reverse_rotate(int *stack, int size)
+static void	reverse_rotate(t_stack *stack)
 {
 	int		i;
-	int     tmp;
+	int		tmp;
 
-	if (size >= 1)
+	if (stack->size >= 1)
 	{
-		tmp = stack[size];
-		i = size;
+		tmp = stack->cntr[stack->size];
+		i = stack->size;
 		while (i > 0)
 		{
-			stack[i] = stack[i - 1];
+			stack->cntr[i] = stack->cntr[i - 1];
 			i--;
 		}
-		stack[0] = tmp;
+		stack->cntr[0] = tmp;
 	}
 }
 
-void	do_rra(int *stack_a, int size)
+void	do_rra(t_stack *a)
 {
-	reverse_rotate(stack_a, size);
+	reverse_rotate(a);
 	ft_putendl_fd("rra", 1);
 }
 
-void	do_rrb(int *stack_b, int size)
+void	do_rrb(t_stack *b)
 {
-	reverse_rotate(stack_b, size);
+	reverse_rotate(b);
 	ft_putendl_fd("rrb", 1);
 }
 
-void	do_rrr(int *stack_a, int *stack_b, int size_a, int size_b)
+void	do_rrr(t_stack *a, t_stack *b)
 {
-	reverse_rotate(stack_a, size_a);
-	reverse_rotate(stack_b, size_b);
+	reverse_rotate(a);
+	reverse_rotate(b);
 	ft_putendl_fd("rrr", 1);
 }

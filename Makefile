@@ -6,7 +6,7 @@
 #    By: mbouzaie <mbouzaie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/09/12 23:24:12 by mbouzaie          #+#    #+#              #
-#    Updated: 2021/12/02 00:55:39 by mbouzaie         ###   ########.fr        #
+#    Updated: 2021/12/02 20:16:20 by mbouzaie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,8 +20,9 @@ LIB_DIR			= srcs/libft/
 LIBS_DIR		= -L. -L$(LIB_DIR)
 
 
-SRCS			= main.c sorting.c operations_push.c operations_rotate.c \
-					operations_r_rotate.c operations_swap.c
+SRCS			= main.c sorters.c operations_push.c operations_rotate.c \
+					operations_r_rotate.c operations_swap.c finders.c \
+					smart_rotate.c utils.c
 CFIND			= $(SRCS:%=$(SRC_DIR)%)
 OFILE			= $(SRCS:%.c=%.o)
 OBJS			= $(addprefix $(OBJ_DIR), $(OFILE))
@@ -30,7 +31,7 @@ OBJS			= $(addprefix $(OBJ_DIR), $(OFILE))
 
 CC				= gcc
 RM				= rm -f
-CFLAGS			= -fsanitize=address -g -o # -O3 -Wall -Wextra -Werror#
+CFLAGS			= -g -fsanitize=address -Wall -Wextra -Werror -o
 				 
 LIBS			= $(CUB3D_H) $(LIBFT_H)
 

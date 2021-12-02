@@ -6,15 +6,15 @@
 /*   By: mbouzaie <mbouzaie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/21 17:52:44 by mbouzaie          #+#    #+#             */
-/*   Updated: 2021/12/02 01:20:30 by mbouzaie         ###   ########.fr       */
+/*   Updated: 2021/12/02 19:16:54 by mbouzaie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../includes/push_swap.h"
+#include "../includes/push_swap.h"
 
-int     find(int *tab, int  val, int n)
+static int	find(int *tab, int val, int n)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (tab[i] != val && i < n - 1)
@@ -22,96 +22,94 @@ int     find(int *tab, int  val, int n)
 	return (tab[i] == val && i < (n - 1));
 }
 
-int		is_sorted(int *stack, int n)
+static void	add_value(t_stack *stack, char **str, int index, int begin)
 {
-	int		i;
+	long int	val;
 
-	i = 0;
-	while (i < n)
+	val = ft_atol(str[index]);
+	if ((str[index][0] != '0' && val == 0) || val > INT_MAX || val < INT_MIN \
+		|| find(stack->cntr, (int)val, index))
 	{
-		if (stack[i] > stack[i + 1])
-			return (0);
-		i++;
+		ft_putstr_fd("Error\n", 2);
+		free(stack->cntr);
+		free(stack);
+		exit(0);
 	}
-	return (1);
+	else
+	{
+		if (begin == 1)
+			stack->cntr[index - 1] = (int)val;
+		else
+			stack->cntr[index] = (int)val;
+	}
 }
 
-t_stack	*create_stack(char **str, int begin, int size)
+static t_stack	*create_stack(char **str, int begin, int size, t_stack *b)
 {
 	int				i;
 	t_stack			*stack;
-	long int		val;
 
 	stack = (t_stack *)malloc(sizeof(t_stack) + 1);
+	if (!stack)
+		return (NULL);
 	stack->cntr = (int *)malloc(size * sizeof(int) * 2);
+	b->cntr = (int *)malloc(size * sizeof(int) * 2);
+	if (!stack->cntr || !b->cntr)
+		return (NULL);
 	i = begin;
 	while (i < size)
 	{
-		val= ft_atol(str[i]);
-		if ((str[i][0] != '0' && val == 0) || val > INT_MAX || val < INT_MIN \
-			|| find(stack->cntr, (int)val, i))
-		{
-			ft_putstr_fd("Error\n", 2);
-			free(stack->cntr);
-			free(stack);
-			exit(0);
-		}
-		else
-		{
-			if (begin == 1)
-				stack->cntr[i - 1] = (int)val;
-			else
-				stack->cntr[i] = (int)val;
-		}
+		add_value(stack, str, i, begin);
 		i++;
 	}
 	stack->size = i - begin - 1;
 	return (stack);
 }
 
-int     main(int ac, char **av)
+static t_stack	*create_from_string(char *arg, t_stack *b)
 {
-	int				i;
-	t_stack			*a;
-	t_stack			b;
-	char			**str;
-	int				*stack_b;
+	int		i;
+	char	**str;
+	t_stack	*a;
 
 	i = 0;
+	str = ft_split(arg, ' ');
+	while (str[i] != NULL)
+		i++;
+	a = create_stack(str, 0, i, b);
+	if (!a)
+		return (NULL);
+	i = 0;
+	while (str[i])
+	{
+		free(str[i]);
+		i++;
+	}
+	free(str);
+	return (a);
+}
+
+int	main(int ac, char **av)
+{
+	t_stack			*a;
+	t_stack			b;
+
 	b.size = -1;
 	if (ac >= 2)
 	{
 		if (ac == 2)
-		{
-			str = ft_split(av[1], ' ');
-			while (str[i] != NULL)
-				i++;
-			a = create_stack(str, 0, i);
-			i = 0;
-			while (str[i])
-			{
-				free(str[i]);
-				i++;
-			}
-			free(str);	
-			stack_b = (int *)malloc(i * sizeof(int) * 2);
-		}
+			a = create_from_string(av[1], &b);
 		else
+			a = create_stack(av, 1, ac, &b);
+		if (!is_sorted(a))
 		{
-			a = create_stack(av, 1, ac);
-			stack_b = (int *)malloc(ac * sizeof(int) * 2);
-		}
-		if (!is_sorted(a->cntr, a->size))
-		{
-			if (i < 5)
-				small_size_sort(a->cntr, stack_b, &(a->size), &(b.size));
+			if (a->size < 5)
+				small_size_sort(a, &b);
 			else
-				big_size_sort(a->cntr,stack_b, &(a->size), &(b.size));
+				big_size_sort(a, &b);
 		}
-		free(stack_b);
+		free(b.cntr);
 		free(a->cntr);
 		free(a);
 	}
-	else
-		ft_putchar_fd('\n', 1);
 }

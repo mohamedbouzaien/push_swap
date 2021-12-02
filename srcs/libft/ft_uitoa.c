@@ -12,9 +12,9 @@
 
 #include "includes/libft.h"
 
-static size_t		udigit_count(uintmax_t n, unsigned int base)
+static size_t	udigit_count(uintmax_t n, unsigned int base)
 {
-	size_t i;
+	size_t	i;
 
 	i = 0;
 	if (n == 0)
@@ -27,7 +27,7 @@ static size_t		udigit_count(uintmax_t n, unsigned int base)
 	return (i);
 }
 
-char				*ft_uitoa(uintmax_t n, unsigned int base)
+char	*ft_uitoa(uintmax_t n, unsigned int base)
 {
 	char	*str;
 	char	dig[16];
@@ -35,7 +35,8 @@ char				*ft_uitoa(uintmax_t n, unsigned int base)
 
 	ft_strcpy(dig, "0123456789abcdef");
 	i = udigit_count(n, base);
-	if (!(str = ft_strnew(i)))
+	str = ft_strnew(i);
+	if (!str)
 		return (NULL);
 	while (i > 0)
 	{

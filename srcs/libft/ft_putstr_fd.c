@@ -14,7 +14,7 @@
 
 void	ft_putstr_fd(char const *s, int fd)
 {
-	int len;
+	int	len;
 
 	if (s)
 	{

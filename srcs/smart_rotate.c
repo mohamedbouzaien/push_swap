@@ -1,36 +1,53 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memmove.c                                       :+:      :+:    :+:   */
+/*   smart_rotate.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbouzaie <mbouzaie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/04 15:44:02 by mbouzaie          #+#    #+#             */
-/*   Updated: 2020/05/12 18:54:10 by mbouzaie         ###   ########.fr       */
+/*   Created: 2021/12/02 18:36:34 by mbouzaie          #+#    #+#             */
+/*   Updated: 2021/12/02 18:41:37 by mbouzaie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/libft.h"
+#include "../includes/push_swap.h"
 
-void	*ft_memmove(void *dst, const void *src, size_t n)
+void	smart_rotate_a(t_stack *a, int index)
 {
-	char	*d;
-	char	*s;
-	size_t	i;
+	int	i;
 
-	if (!dst && !src)
-		return (NULL);
-	i = 0;
-	d = (char *)dst;
-	s = (char *)src;
-	if (d < s)
-		while (i < n)
+	i = index - 1;
+	while (i >= 0 && i < a->size)
+	{
+		if (index > a->size / 2)
 		{
-			d[i] = s[i];
+			do_rra(a);
 			i++;
 		}
-	else
-		while (n-- > 0)
-			d[n] = s[n];
-	return (dst);
+		else
+		{
+			do_ra(a);
+			i--;
+		}
+	}
+}
+
+void	smart_rotate_b(t_stack *b, int index)
+{
+	int	i;
+
+	i = index - 1;
+	while (i >= 0 && i < b->size)
+	{
+		if (index > b->size / 2)
+		{
+			do_rrb(b);
+			i++;
+		}
+		else
+		{
+			do_rb(b);
+			i--;
+		}
+	}
 }

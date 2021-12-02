@@ -12,7 +12,7 @@
 
 #include "includes/libft.h"
 
-int				ft_chrloc(char *str, int ch)
+int	ft_chrloc(char *str, int ch)
 {
 	size_t		length;
 

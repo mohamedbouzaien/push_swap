@@ -6,7 +6,7 @@
 #    By: mbouzaie <mbouzaie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/03 15:10:22 by mbouzaie          #+#    #+#              #
-#    Updated: 2021/12/01 23:36:07 by mbouzaie         ###   ########.fr        #
+#    Updated: 2021/12/02 16:32:00 by mbouzaie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,6 @@ SRC = 	ft_memset.c \
 		ft_bzero.c \
 		ft_memcpy.c \
 		ft_memccpy.c \
-		ft_memmove.c \
 		ft_memchr.c \
 		ft_memcmp.c \
 		ft_strlen.c \
@@ -71,6 +70,7 @@ SRC = 	ft_memset.c \
 		ft_memdel.c \
 		ft_uitoa.c \
 		ft_atol.c \
+		ft_abs.c \
 
 SRC_B =	ft_lstnew.c \
 		ft_lstadd_front.c \

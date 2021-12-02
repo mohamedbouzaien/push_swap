@@ -23,7 +23,7 @@ void	*ft_calloc(size_t count, size_t size)
 		return (NULL);
 	while (i < (count * size))
 	{
-		((char*)allocated)[i] = 0;
+		((char *)allocated)[i] = 0;
 		i++;
 	}
 	return (allocated);

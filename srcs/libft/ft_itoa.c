@@ -12,9 +12,9 @@
 
 #include "includes/libft.h"
 
-int		ft_intlength(intmax_t n)
+int	ft_intlength(intmax_t n)
 {
-	int len;
+	int	len;
 
 	len = 0;
 	if (n == -2147483648)
@@ -41,8 +41,7 @@ char	*ft_itoa(intmax_t n)
 
 	if (n == 0)
 		return (ft_strdup("0"));
-	if (!(ito = (char *)malloc(sizeof(char) * (ft_intlength(n) + 1))))
-		return (NULL);
+	ito = (char *)malloc(sizeof(char) * (ft_intlength(n) + 1));
 	i = ft_intlength(n) - 1;
 	ito[i + 1] = '\0';
 	if (n < 0)
